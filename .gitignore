@@ -1,1 +1,29 @@
+# Node modules
+node_modules/
+
+# Logs
+*.log
+
+# Build directories
+build/
+dist/
+
+# IDE files
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Environment variables
 .env
+
+# Secrets or config files
+*.env*
+
+# TypeScript build files
+*.tsbuildinfo
+*.js
+
+# Coverage reports
+coverage/
