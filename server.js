@@ -155,7 +155,7 @@ app.get("/all", async (req, res) => {
 });
 
 app.get("/", (req, res) => {
-  res.send("Ahlan Ma Sahlan BEEEEEEK");
+  res.send("Ahlan Ma Sahlan BEEEEEEK😊");
 });
 
 app.listen(3000, () => {
