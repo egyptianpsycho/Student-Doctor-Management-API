@@ -95,6 +95,20 @@ app.get("/students", async (req, res) => {
   }
 });
 
+// Fetch All Doctors
+app.get("/doctors", async (req, res) => {
+  try {
+    const doctors = await Doctors.find();
+    res.status(200);
+    console.log("Total doctors fetched:", doctors.length);
+    res.json({ message: "All doctors fetched from the database", doctors });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to fetch doctors", error: error.message });
+  }
+});
+
 // Delete a student
 app.delete("/students/:id", async (req, res) => {
   try {
