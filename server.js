@@ -129,6 +129,26 @@ app.delete("/students/:id", async (req, res) => {
   }
 });
 
+// Delete a Doctor 
+app.delete("/doctors/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedDoctor = await Doctors.findByIdAndDelete(id);
+
+    if (!deletedDoctor) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "Student deleted successfully", deletedDoctor });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to delete student", error: error.message });
+  }
+});
+
 // update doctor name (query params)
 app.put("/doctors", async (req, res) => {
   try {
@@ -150,6 +170,35 @@ app.put("/doctors", async (req, res) => {
     res.status(200).json({
       message: `Doctor name updated from '${oldName}' to '${newName}'`,
       updatedDoctor,
+    });
+  } catch (error) {
+    res
+      .status(500)
+      .json({ message: "Failed to update doctor name", error: error.message });
+  }
+});
+
+// update student name (query params)
+app.put("/students", async (req, res) => {
+  try {
+    const { oldName, newName } = req.query;
+    if (!oldName || !newName) {
+      return res.status(400).json({ message: "Missing query parameters" });
+    }
+
+    const updatedStudent = await Students.findOneAndUpdate(
+      { name: oldName },
+      { name: newName },
+      { new: true }
+    );
+
+    if (!updatedStudent) {
+      return res.status(404).json({ message: "Student not found" });
+    }
+
+    res.status(200).json({
+      message: `Student name updated from '${oldName}' to '${newName}'`,
+      updatedStudent
     });
   } catch (error) {
     res
